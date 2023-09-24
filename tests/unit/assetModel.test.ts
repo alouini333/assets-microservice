@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 require('dotenv').config({ path: '.env.test' });
 import { createAsset, deleteAssetById, findAllAssets, findAssetById } from "../../src/models/assetModel"
 import { AssetData } from "../../src/types/assetTypes";

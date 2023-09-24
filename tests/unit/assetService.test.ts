@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 require('dotenv').config({ path: '.env.test' });
 import { AssetData } from "../../src/types/assetTypes";
 import { knex } from '../../src/models/db';
@@ -38,7 +39,10 @@ describe('assetService', () => {
             name: 'new asset',
             type: 'video'
         }
-        const uuid = await createAssetService(newAsset, 'content');
+        const categories = [
+            ''
+        ]
+        const uuid = await createAssetService(newAsset, 'content', categories);
         expect(uuid).toBeDefined();
         expect(typeof uuid === 'string').toBeTruthy();
     });

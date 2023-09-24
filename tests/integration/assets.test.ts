@@ -1,24 +1,39 @@
 require('dotenv').config({ path: '.env.test' });
+import axios from 'axios';
 import request from 'supertest';
 import { knex } from '../../src/models/db';
 import app from '../../app';
+import { MOCKED_DATA } from '../constants';
 
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Assets', () => {
     beforeEach(async () => {
         // Run migrations to set up in-memory db schema before each test
         await knex.migrate.latest();
         await knex.seed.run();
+        // Mocking the axios response.
+        mockedAxios.get.mockResolvedValueOnce({
+            status: 200,
+            data: {
+                status: 'success',
+                data: [...MOCKED_DATA]
+            }
+        });
+        
     });
     
     afterEach(async () => {
         // Rollback migrations after each test to ensure a clean slate
         await knex.migrate.rollback();
+        jest.clearAllMocks();
     });
     
     afterAll(async () => {
         // Destroy the connection after all tests have run
         await knex.destroy();
+        jest.clearAllMocks();
     });
     it('Get all assets: GET /', async () => {
         const res = await request(app).get('/');
@@ -31,6 +46,16 @@ describe('Assets', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('status', 'success');
         expect(res.body.data).toHaveProperty('name', 'asset 1');
+        expect(res.body.data.categories).toStrictEqual([
+            {
+                uuid: '27b74e98-9e40-4118-8263-804f54f25292',
+                name: 'Tech'
+            },
+            {
+                uuid: '399397e4-998e-4f81-955a-17a4b1399782',
+                name: 'Phones'
+            }
+        ]);
     });
     it('Get an asset: GET /:uuid with inexistant id', async () => {
         const res = await request(app).get('/0ebdf537-84fc-4303-8a4d-27f9c2f95b8c');
@@ -48,7 +73,8 @@ describe('Assets', () => {
         const data = {
             name: 'asset test',
             type: 'image',
-            content: 'my_content'
+            content: 'my_content',
+            categories: ['27b74e98-9e40-4118-8263-804f54f25292', '399397e4-998e-4f81-955a-17a4b1399782']
         }
         const res = await request(app).post('/').send(data);
         expect(res.statusCode).toEqual(201);
