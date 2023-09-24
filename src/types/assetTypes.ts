@@ -9,10 +9,21 @@ export interface Asset {
   type: 'video' | 'document' | 'image';
   path: string;
   created_at?: Date;
+  categoryIds: string[]
 }
 
-export type AssetData = Omit<Asset, 'asset_id' | 'created_at'>;
+export interface Category {
+  category_id: string;
+  name: string;
+}
 
-export interface AssetWithCategories extends Asset {
+export interface AssetCategory {
+  asset_id: string;
+  category_id: string;
+}
+
+export type AssetData = Omit<Asset, 'asset_id' | 'created_at' |'categoryIds'>;
+
+export interface AssetWithCategories extends Omit<Asset, 'categoryIds'> {
   categories?: Category[];
 }

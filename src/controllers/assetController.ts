@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import * as assetService from '../services/assetService';
-import { AssetData } from '@/types/assetTypes';
+import { AssetData } from '../types/assetTypes';
 
 export const getAssets = async (
   req: Request,
@@ -64,7 +64,8 @@ export const createAsset = async (
       type: req.body.type,
     };
     const content: string = req.body.content;
-    await assetService.createAssetService(data, content);
+    const categories: string[] = req.body.categories;
+    await assetService.createAssetService(data, content, categories);
     res.status(201).json({
       status: 'success',
       message: 'Asset created with success',
