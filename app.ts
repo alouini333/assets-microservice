@@ -14,6 +14,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/', assetsRoutes);
+
 app.use(errorMiddleware);
 
 export default app;
