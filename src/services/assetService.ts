@@ -21,7 +21,7 @@ export const createAssetService = async (
   }
 };
 
-export const getAssetByIdService = async (assetId: string): Promise<> => {
+export const getAssetByIdService = async (assetId: string): Promise<AssetWithCategories> => {
   try {
     const asset = await AssetModel.findAssetById(assetId);
     if (asset === undefined) {
