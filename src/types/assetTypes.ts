@@ -12,6 +12,8 @@ export interface Asset {
     created_at?: Date;
 }
 
+export type AssetData = Omit<Asset, "asset_id" | "created_at">;
+
 export interface AssetWithCategories extends Asset {
     categories?: Category[];
 }
