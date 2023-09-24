@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Asset } from 'src/types/assetTypes';
+import { Asset, AssetData } from '@/types/assetTypes';
 import { getDbClient } from '../../getDbClient';
 
 const client = getDbClient();
 
-export const createAsset = async (data: Partial<Asset>) => {
+export const createAsset = async (data: AssetData): Promise<string> => {
     try {
         const { name, type, path } = data;
         const uuid = uuidv4();
