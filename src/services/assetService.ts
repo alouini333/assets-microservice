@@ -29,7 +29,7 @@ export const getAssetByIdService = async (assetId: string): Promise<AssetWithCat
     }
     const allCategories = await CategoryModel.findAllCategories();
     const categories = allCategories.filter(category => {
-      return asset.categoryIds.indexOf(category.uuid) !== -1;
+      return asset.categoryIds.indexOf(category.category_id) !== -1;
     });
     const {
       asset_id,
