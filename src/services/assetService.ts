@@ -3,10 +3,10 @@ import * as AssetModel from '../models/assetModel';
 import { Asset, AssetData } from '../types/assetTypes';
 import { store } from '../utils/storage';
 
-export const createAssetService = async (data: Omit<AssetData, "path">, content: Buffer): Promise<string> => {
+export const createAssetService = async (data: Omit<AssetData, "path">, contentBase64: string): Promise<string> => {
     try {
         // Simulate the upload of the asset to one of the system files
-        const path = store(content);
+        const path = store(contentBase64);
         const assetId = await AssetModel.createAsset({ ...data, path });
         return assetId;
     } catch (err) {

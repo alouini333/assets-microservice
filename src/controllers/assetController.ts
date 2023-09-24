@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import * as assetService from '../services/assetService';
+import { AssetData } from '@/types/assetTypes';
 
 export const getAssets = async (
   req: Request,
@@ -58,8 +59,12 @@ export const deleteAsset = async (
     next: NextFunction,
   ) => {
     try {
-        const { id } = req.params;
-        await assetService.deleteAssetService(id);
+        const data: Omit<AssetData, "path"> = {
+          name: req.body.name,
+          type: req.body.type
+        };
+        const content: string = req.body.content;
+        await assetService.createAssetService(data, content);
         res.json({
             status: 'success',
             message: 'Asset deleted with success'
