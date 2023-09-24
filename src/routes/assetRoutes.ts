@@ -9,11 +9,12 @@ const router = Router();
 
 router.post('/', validate(createAssetSchema), assetController.createAsset);
 router.get('/', assetController.getAssets);
-router.get('/:id', validate(assetIdSchema, 'params'), assetController.getAsset);
 router.delete(
   '/:id',
   validate(assetIdSchema, 'params'),
   assetController.deleteAsset,
 );
+router.get('/:id', validate(assetIdSchema, 'params'), assetController.getAsset);
+
 
 export default router;

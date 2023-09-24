@@ -13,7 +13,7 @@ app.get('/health', (req, res) => {
   res.json({ info: 'App is running!' });
 });
 
-app.use('/', assetsRoutes);
+app.use('/assets', assetsRoutes);
 
 app.use(errorMiddleware);
 
