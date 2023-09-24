@@ -4,6 +4,7 @@
   "scripts": {
     "init-schema": "ts-node initSchema.ts",
     "start": "ts-node index.ts",
+    "serve": "node dist/index.js",
     "test:unit": "jest --coverage -c jest.unit.config.js",
     "test:integration": "jest --coverage -c jest.integration.config.js",
     "knex": "knex",
