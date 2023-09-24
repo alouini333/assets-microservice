@@ -4,7 +4,7 @@ import Joi from 'joi';
 export const createAssetSchema = Joi.object({
     name: Joi.string().required(),
     type: Joi.string().valid('image', 'video', 'document').required(),
-    content: Joi.binary().required()
+    content: Joi.string().required()
 });
 
 // Schema to get an asset
