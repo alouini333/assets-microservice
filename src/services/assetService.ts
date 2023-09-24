@@ -1,15 +1,18 @@
-import { AssetNotFound } from 'src/errors/AssetNotFound';
-import * as AssetModel from '../models/assetModel';
-import { Asset } from 'src/types/assetTypes';
+import { AssetNotFound } from '@/errors/AssetNotFound';
+import * as AssetModel from '@/models/assetModel';
+import { Asset, AssetData } from '@/types/assetTypes';
+import { store } from '@/utils/storage';
 
-export const createAssetService = async (data: Partial<Asset>): Promise<string> => {
-    if (!data.name || !data.type || !data.path) {
-        throw new Error('Asset data is incomplete');
+export const createAssetService = async (data: Omit<AssetData, "path">, content: Buffer): Promise<string> => {
+    try {
+        // Simulate the upload of the asset to one of the system files
+        const path = store(content);
+        const assetId = await AssetModel.createAsset({ ...data, path });
+        return assetId;
+    } catch (err) {
+        console.error(err);
+        throw err;
     }
-    
-    // You can add more validations or business logic here
-
-    return await AssetModel.createAsset(data);
 }
 
 export const getAssetByIdService = async (assetId: string): Promise<Asset> => {
@@ -34,6 +37,11 @@ export const getAllAssetsService = async (): Promise<Asset[]> => {
 }
 
 export const deleteAssetService = async (assetId: string): Promise<void> => {
-    return await AssetModel.deleteAssetById(assetId);
+    try {
+        await AssetModel.deleteAssetById(assetId);
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
 }
 
