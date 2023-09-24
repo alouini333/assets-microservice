@@ -6,7 +6,7 @@ import { store } from '../utils/storage';
 export const createAssetService = async (data: Omit<AssetData, "path">, contentBase64: string): Promise<string> => {
     try {
         // Simulate the upload of the asset to one of the system files
-        const path = store(contentBase64);
+        const path = store(contentBase64, data.type);
         const assetId = await AssetModel.createAsset({ ...data, path });
         return assetId;
     } catch (err) {
