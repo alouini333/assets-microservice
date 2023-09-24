@@ -9,7 +9,7 @@ export const getAssets = async (
 ) => {
   try {
     const assets = await assetService.getAllAssetsService();
-    res.json({
+    res.status(200).json({
         status: 'success',
         data: assets
     });
@@ -26,7 +26,7 @@ export const getAsset = async (
   try {
     const { id } = req.params;
     const asset = await assetService.getAssetByIdService(id);
-    res.json({
+    res.status(200).json({
         status: 'success',
         data: asset
     });
@@ -43,7 +43,7 @@ export const deleteAsset = async (
     try {
         const { id } = req.params;
         await assetService.deleteAssetService(id);
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: 'Asset deleted with success'
         });
@@ -65,9 +65,9 @@ export const deleteAsset = async (
         };
         const content: string = req.body.content;
         await assetService.createAssetService(data, content);
-        res.json({
+        res.status(201).json({
             status: 'success',
-            message: 'Asset deleted with success'
+            message: 'Asset created with success'
         });
     } catch (err) {
         next(err);
