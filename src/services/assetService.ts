@@ -1,7 +1,7 @@
 import { AssetNotFound } from '../errors/AssetNotFound';
 import * as AssetModel from '../models/assetModel';
 import * as CategoryModel from '../models/categoryModel';
-import { Asset, AssetData, AssetWithCategories } from '../types/assetTypes';
+import { AssetData, AssetWithCategories } from '../types/assetTypes';
 import { store } from '../utils/storage';
 
 export const createAssetService = async (
@@ -21,7 +21,7 @@ export const createAssetService = async (
   }
 };
 
-export const getAssetByIdService = async (assetId: string): Promise<AssetWithCategories> => {
+export const getAssetByIdService = async (assetId: string): Promise<> => {
   try {
     const asset = await AssetModel.findAssetById(assetId);
     if (asset === undefined) {
