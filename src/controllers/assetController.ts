@@ -42,6 +42,7 @@ export const deleteAsset = async (
 ) => {
   try {
     const { id } = req.params;
+    await assetService.getAssetByIdService(id);
     await assetService.deleteAssetService(id);
     res.status(200).json({
       status: 'success',
