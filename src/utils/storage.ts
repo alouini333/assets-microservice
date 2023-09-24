@@ -6,12 +6,12 @@ type StorageType = 'image' | 'video' | 'document';
  * @param content String
  */
 export const store = (_base64Content: string, type: StorageType): string => {
-    const extensions = {
-        image: '.png',
-        video: '.mp4',
-        document: '.pdf'
-    }
-    const path = randomstring.generate(16);
-    const extension = extensions[type];
-    return `${path}${extension}`;
-} 
+  const extensions = {
+    image: '.png',
+    video: '.mp4',
+    document: '.pdf',
+  };
+  const path = randomstring.generate(16);
+  const extension = extensions[type];
+  return `${path}${extension}`;
+};
