@@ -1,7 +1,7 @@
-import { AssetNotFound } from '@/errors/AssetNotFound';
-import * as AssetModel from '@/models/assetModel';
-import { Asset, AssetData } from '@/types/assetTypes';
-import { store } from '@/utils/storage';
+import { AssetNotFound } from '../errors/AssetNotFound';
+import * as AssetModel from '../models/assetModel';
+import { Asset, AssetData } from '../types/assetTypes';
+import { store } from '../utils/storage';
 
 export const createAssetService = async (data: Omit<AssetData, "path">, content: Buffer): Promise<string> => {
     try {

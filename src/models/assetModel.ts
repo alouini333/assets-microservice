@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Asset, AssetData } from '@/types/assetTypes';
+import { Asset, AssetData } from '../types/assetTypes';
 import { getDbClient } from '../../getDbClient';
 
 const client = getDbClient();

@@ -1,4 +1,4 @@
-import { CustomError } from '@/errors/CustomError';
+import { CustomError } from './CustomError';
 
 export class AssetNotFound extends CustomError {
   statusCode = 404;

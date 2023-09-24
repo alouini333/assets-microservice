@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import * as assetService from '@/services/assetService';
+import * as assetService from '../services/assetService';
 
 export const getAssets = async (
   req: Request,

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import * as assetController from '@/controllers/assetController';
-import { validate } from '@/middlewares/validationMiddleware';
-import { assetIdSchema, createAssetSchema } from '@/validation/assetValidation';
+import * as assetController from '../controllers/assetController';
+import { validate } from '../middlewares/validationMiddleware';
+import { assetIdSchema, createAssetSchema } from '../validation/assetValidation';
 const router = Router();
 
 router.post('/', validate(createAssetSchema), assetController.createAsset);
