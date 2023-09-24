@@ -32,7 +32,7 @@ export const getAssetByIdService = async (assetId: string): Promise<Asset> => {
 
 export const getAllAssetsService = async (): Promise<Asset[]> => {
   try {
-    const assets = await await AssetModel.findAllAssets();
+    const assets = await AssetModel.findAllAssets();
     return assets;
   } catch (err) {
     throw err;
